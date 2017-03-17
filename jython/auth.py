@@ -129,8 +129,9 @@ class auth(HttpServlet):
         client_id = 'APP-WTHDFZPAUVXQW8GG' # production member
 
         code = request.getParameter("code")
+        locale = request.getParameter("locale")
         if code is None:
-            self.redirect(response, client_id, scope='/activities/update /read-limited')
+            self.redirect(response, client_id, scope='/activities/update /read-limited', locale=locale)
             return
 
         result = self.get_and_store_token(response, client_id, code)
@@ -148,16 +149,20 @@ class auth(HttpServlet):
                 return str(locale)
         return None
 
-    def redirect(self, response, client_id, scope='/authenticate'):
+    def redirect(self, response, client_id, scope='/authenticate', locale=None):
         """Redirect user to ORCID to log in and to authorize this client app."""
         if self.client[client_id]['env'] == 'production':
             base_url = 'https://orcid.org'
         else:
             base_url = 'https://sandbox.orcid.org'
 
+        if locale is None:
+            locale = 'en'
+
         location = base_url + '/oauth/authorize?client_id=' + client_id + \
             '&response_type=code&scope=' + scope + \
-            '&redirect_uri=' + self.client[client_id]['redirect_uri']
+            '&redirect_uri=' + self.client[client_id]['redirect_uri'] + \
+            '&lang=' + locale
 
         response.sendRedirect(location)  # redirect to ORCID /oauth/authorize
         return
