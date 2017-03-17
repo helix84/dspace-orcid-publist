@@ -1,0 +1,9 @@
+*.pyc
+__pycache__
+[Bb]in
+[Ii]nclude
+[Ll]ib
+[Ss]rc
+pip-selfcheck.json
+config/config.ini
+config/orcid.cfg

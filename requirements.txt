@@ -1,0 +1,5 @@
+configparser==3.5.0
+Jinja2==2.9.5
+-e git+https://github.com/ORCID/python-orcid.git@9a45bf524a08b22ad914f0fdfca980736bcb1621#egg=orcid
+psycopg2==2.7
+requests==2.13.0

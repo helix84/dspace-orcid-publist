@@ -1,0 +1,2 @@
+[database]
+dspacedb=host=HOST dbname=DATABASE user=USER password=PASSWORD
